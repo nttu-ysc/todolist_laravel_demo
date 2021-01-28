@@ -6,6 +6,7 @@
 </head>
 
 <body>
+    @include('layouts.navbar')
     @yield('panel')
 </body>
 
