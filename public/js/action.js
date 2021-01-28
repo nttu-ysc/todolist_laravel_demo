@@ -35,19 +35,17 @@ $(document).ready(function () {
                     });
             }
         })
-    //delete
-    // .on('click', 'li .delete', function (e) {
-    //     var result = confirm('Do you want to delete?');
-    //     if (result) {
-    //         var id = $(this).closest('li').data('id');
-    //         $.post("todo/delete.php", { id: id },
-    //             function (data, textStatus, jqXHR) {
-    //                 $(e.currentTarget).closest('li').remove();
-    //             },
-    //             "json"
-    //         );
-    //     }
-    // })
+        //delete
+        .on('click', 'li .delete', function (e) {
+            var result = confirm('Do you want to delete?');
+            if (result) {
+                var id = $(this).closest('li').data('id');
+                $.post("/todos/" + id, { _method: 'delete', id: id },
+                    function (data, textStatus, jqXHR) {
+                        $(e.currentTarget).closest('li').remove();
+                    });
+            }
+        })
     //complete
     // .on('click', '.checkbox', function (e) {
     //     if ($(this).closest('li').find('.content').text().length > 0) {
