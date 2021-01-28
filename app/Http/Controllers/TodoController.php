@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -14,7 +15,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $todos = Todo::where('user_id', Auth::id())->orderBy('order')->get();
+        return view('index', ['todos' => $todos]);
     }
 
     /**
