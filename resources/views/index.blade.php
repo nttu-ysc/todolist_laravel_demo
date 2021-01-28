@@ -6,7 +6,7 @@
     <div id="todo-list">
         <ul>
             @foreach ($todos as $todo)
-            <li data-id="{{$todo->id}}" class="{{$todo->iscomplete}}">
+            <li data-id="{{$todo->id}}" class="@if($todo->iscomplete) complete @endif">
                 <div class="checkbox"></div>
                 <div class="content" contenteditable="false">{{$todo->event}}</div>
                 <div class="action">

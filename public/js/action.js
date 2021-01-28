@@ -14,7 +14,7 @@ $(document).ready(function () {
                 var todo = $(e.currentTarget).text().trim();
                 var order = $('#todo-list').find('li').length;
                 if (todo.length > 0) {
-                    $.post("/todos", { event: todo, order: order },
+                    $.post("/todos", { event: todo, order: order, iscomplete: 0 },
                         function (data, textStatus, jqXHR) {
                             $(e.currentTarget).closest('li').before("<li data-id=" + data.todo.id + "></li>")
                                 .siblings().last().append("<div class=" + "checkbox" + "></div>")
@@ -46,19 +46,17 @@ $(document).ready(function () {
                     });
             }
         })
-    //complete
-    // .on('click', '.checkbox', function (e) {
-    //     if ($(this).closest('li').find('.content').text().length > 0) {
-    //         var id = $(this).closest('li').data('id');
-    //         $.post("todo/complete.php", { id: id },
-    //             function (data, textStatus, jqXHR) {
-    //                 $(e.currentTarget).closest('li').toggleClass('complete');
-    //             },
-    //             "json"
-    //         );
-
-    //     }
-    // });
+        //complete
+        .on('click', '.checkbox', function (e) {
+            if ($(this).closest('li').find('.content').text().length > 0) {
+                var id = $(this).closest('li').data('id');
+                var action = '/todos/' + id + '/iscomplete';
+                $.post(action, { _method: 'put', id: id },
+                    function (data, textStatus, jqXHR) {
+                        $(e.currentTarget).closest('li').toggleClass('complete');
+                    });
+            }
+        });
     // $('#todo-list').find('ul').sortable({
     //     items: "li:not(.new)",
     //     stop: function () {

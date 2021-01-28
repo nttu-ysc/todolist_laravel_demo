@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [TodoController::class, 'index']);
     Route::resource('todos', TodoController::class)->only('index', 'store', 'update', 'destroy');
+    Route::put('/todos/{todo}/iscomplete', [TodoController::class, 'iscomplete']);
 });
 
 Auth::routes();

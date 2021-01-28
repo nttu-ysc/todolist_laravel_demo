@@ -47,6 +47,13 @@ class TodoController extends Controller
         $todo->save();
     }
 
+    public function iscomplete(Todo $todo)
+    {
+        $todo->iscomplete = ($todo->iscomplete) ? (0) : (1);
+        $todo->save();
+        return ['todo' => $todo];
+    }
+
     /**
      * Remove the specified resource from storage.
      *
