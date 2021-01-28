@@ -54,6 +54,15 @@ class TodoController extends Controller
         return ['todo' => $todo];
     }
 
+    public function order(Request $request)
+    {
+        foreach ($request->orderPair as  $order) {
+            $todo = Todo::find($order['id']);
+            $todo->order = $order['order'];
+            $todo->save();
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

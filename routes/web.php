@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [TodoController::class, 'index']);
     Route::resource('todos', TodoController::class)->only('index', 'store', 'update', 'destroy');
     Route::put('/todos/{todo}/iscomplete', [TodoController::class, 'iscomplete']);
+    Route::put('/todos/{todo}/order', [TodoController::class, 'order']);
 });
 
 Auth::routes();

@@ -57,16 +57,19 @@ $(document).ready(function () {
                     });
             }
         });
-    // $('#todo-list').find('ul').sortable({
-    //     items: "li:not(.new)",
-    //     stop: function () {
-    //         var orderPair = [];
-    //         $('#todo-list').find('li:not(.new)').each(function (index, li) {
-    //             var order = index + 1;
-    //             var id = $(li).data('id');
-    //             orderPair.push({ id, order });
-    //         });
-    //         $.post("todo/sort.php", { orderPair: orderPair });
-    //     }
-    // });
+    $('#todo-list').find('ul').sortable({
+        items: "li:not(.new)",
+        stop: function () {
+            var orderPair = [];
+            $('#todo-list').find('li:not(.new)').each(function (index, li) {
+                orderPair.push({
+                    id: $(li).data('id'),
+                    order: index + 1,
+                });
+            });
+            var actionUrl = '/todos/1/order';
+            console.log(orderPair);
+            $.post(actionUrl, { _method: 'put', orderPair: orderPair });
+        }
+    });
 });
