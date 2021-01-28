@@ -26,16 +26,14 @@ $(document).ready(function () {
                 }
             }
             //update
-            // else {
-            //     var id = $(this).closest('li').data('id');
-            //     var content = $(this).text().trim();
-            //     $.post("todo/update.php", { id: id, content: content },
-            //         function (data, textStatus, jqXHR) {
-            //             $(this).prop('contenteditable', false);
-            //         },
-            //         "json"
-            //     );
-            // }
+            else {
+                var id = $(this).closest('li').data('id');
+                var content = $(this).text().trim();
+                $.post("/todos/" + id, { _method: 'put', event: content },
+                    function (data, textStatus, jqXHR) {
+                        $(this).prop('contenteditable', false);
+                    });
+            }
         })
     //delete
     // .on('click', 'li .delete', function (e) {
