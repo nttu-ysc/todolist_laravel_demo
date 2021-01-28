@@ -9,6 +9,9 @@
             <li data-id="{{$todo->id}}" class="{{$todo->iscomplete}}">
                 <div class="checkbox"></div>
                 <div class="content" contenteditable="false">{{$todo->event}}</div>
+                <div class="action">
+                    <div class="delete">X</div>
+                </div>
             </li>
             @endforeach
             <li class="new">
