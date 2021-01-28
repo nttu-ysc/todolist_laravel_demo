@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', [TodoController::class, 'index']);
+    Route::resource('todos', TodoController::class);
 });
 
 Auth::routes();
