@@ -7,6 +7,7 @@ $(document).ready(function () {
     $('#todo-list')
         .on('dblclick', 'li .content', function (e) {
             $(this).prop('contenteditable', true).focus();
+            originContent = $(this).text().trim();
         })
         .on('blur', 'li .content', function (e) {
             //create
@@ -32,6 +33,9 @@ $(document).ready(function () {
                 $.post("/todos/" + id, { _method: 'put', event: content },
                     function (data, textStatus, jqXHR) {
                         $(this).prop('contenteditable', false);
+                    }).fail(function (xhr) {
+                        alert(xhr.responseJSON.errors.event);
+                        $('[data-id=' + id + ']').find('.content').text(originContent);
                     });
             }
         })
